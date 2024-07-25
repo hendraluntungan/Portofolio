@@ -10,11 +10,19 @@ $(document).ready(function () {
   $(".email-button").click(function (e) {
     e.preventDefault();
 
-    const sender = $('input[name="sender"]').val();
-    const email = $('input[name="email"]').val();
-    const subject = $('input[name="subject"]').val();
-    const message = $('textarea[name="message"]').val();
-
+    const sender = $('input[name="sender"]').val().trim();
+    const email = $('input[name="email"]').val().trim();
+    const subject = $('input[name="subject"]').val().trim();
+    const message = $('textarea[name="message"]').val().trim();
+    if (sender === "" || email === "" || subject === "" || message === "") {
+      alert("Please fill in all fields.");
+      return;
+    }
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
     console.log("Sender:", sender);
     console.log("Email:", email);
     console.log("Subject:", subject);
